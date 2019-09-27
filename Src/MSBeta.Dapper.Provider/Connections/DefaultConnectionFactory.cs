@@ -12,6 +12,8 @@ namespace DapperExtensions.Connections
             _dbOption = dbOption;
         }
 
+        public DbOption DbOption => _dbOption;
+
         public DbConnection CreateConnection(string connectionString)
         {
             DbConnection dbConnection;

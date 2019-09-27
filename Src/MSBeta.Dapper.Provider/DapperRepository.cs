@@ -14,12 +14,13 @@ namespace DapperExtensions
         #endregion
 
         #region Ctor
+        public DapperRepository() : this(DapperProvider.ConnectionPool.RentConnection()) { }
+        public DapperRepository(IConnectionPool _connectionPool) : this(_connectionPool.RentConnection()) { }
+        public DapperRepository(IDbContext dbContext) : this(dbContext.GetDbConnection()) { }
         public DapperRepository(DbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }
-        public DapperRepository(IConnectionPool _connectionPool) : this(_connectionPool.RentConnection()) { }
-        public DapperRepository(IDbContext dbContext) : this(dbContext.GetDbConnection()) { }
         #endregion
 
         #region Utilities
