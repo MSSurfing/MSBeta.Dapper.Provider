@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>DapperExtensions</RootNamespace>
+    <Version>3.0.1-preview</Version>
+    <Authors>MSBeta</Authors>
+    <Product>MSBeta</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/MSSurfing/MSBeta.Dapper.Provider</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
