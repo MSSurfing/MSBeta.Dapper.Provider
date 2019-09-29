@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using System.Data;
 using DapperExtensions.Connections;
 
 namespace DapperExtensions
@@ -14,7 +14,7 @@ namespace DapperExtensions
             _connectionPool = connectionPool;
         }
 
-        public DbConnection GetDbConnection()
+        public IDbConnection GetDbConnection()
         {
             return _connectionPool.RentConnection();
         }

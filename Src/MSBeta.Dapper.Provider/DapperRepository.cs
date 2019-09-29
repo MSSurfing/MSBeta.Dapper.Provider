@@ -1,7 +1,7 @@
 ﻿using DapperExtensions.Connections;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
+using System.Data;
 using System.Linq;
 
 namespace DapperExtensions
@@ -9,22 +9,22 @@ namespace DapperExtensions
     public class DapperRepository<T> : IRepository<T> where T : class
     {
         #region Fields
-        private readonly DbConnection _dbConnection;
-        private DbTransaction _dbTransaction = null;
+        private readonly IDbConnection _dbConnection;
+        private IDbTransaction _dbTransaction = null;
         #endregion
 
         #region Ctor
         public DapperRepository() : this(DapperProvider.ConnectionPool.RentConnection()) { }
         public DapperRepository(IConnectionPool _connectionPool) : this(_connectionPool.RentConnection()) { }
         public DapperRepository(IDbContext dbContext) : this(dbContext.GetDbConnection()) { }
-        public DapperRepository(DbConnection dbConnection)
+        public DapperRepository(IDbConnection IDbConnection)
         {
-            _dbConnection = dbConnection;
+            _dbConnection = IDbConnection;
         }
         #endregion
 
         #region Utilities
-        protected virtual DbConnection DbConnection => _dbConnection;
+        protected virtual IDbConnection IDbConnection => _dbConnection;
         #endregion
 
         #region Properties
@@ -130,8 +130,8 @@ namespace DapperExtensions
         }
         #endregion
 
-        #region Use DbTransaction
-        public virtual IDisposable UseTransaction(DbTransaction transaction)
+        #region Use IDbTransaction
+        public virtual IDisposable UseTransaction(IDbTransaction transaction)
         {
             return new Transactor(this, transaction); ;
         }
@@ -148,10 +148,10 @@ namespace DapperExtensions
         {
             private readonly DapperRepository<T> _repository;
 
-            public Transactor(DapperRepository<T> repository, DbTransaction dbTransaction)
+            public Transactor(DapperRepository<T> repository, IDbTransaction IDbTransaction)
             {
                 _repository = repository;
-                _repository._dbTransaction = dbTransaction;
+                _repository._dbTransaction = IDbTransaction;
             }
 
             public void Dispose() => _repository._dbTransaction = null;

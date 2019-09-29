@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Text;
+using System.Data;
 
 namespace DapperExtensions
 {
@@ -57,8 +56,8 @@ namespace DapperExtensions
         bool Delete(IPredicate where);
         #endregion
 
-        #region Use DbTransaction
-        IDisposable UseTransaction(DbTransaction transaction);
+        #region Use IDbTransaction
+        IDisposable UseTransaction(IDbTransaction transaction);
         #endregion
     }
 }

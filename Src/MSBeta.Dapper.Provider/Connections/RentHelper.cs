@@ -20,7 +20,7 @@ namespace DapperExtensions.Connections
         }
 
         #region Utilities
-        private RentedConnection AcquireOrCreateConnection()
+        private RentedConnection RentOrCreateConnection()
         {
             PooledConnection connection = _pool.ListConnectionHolder.Rent();
             if (connection == null)
@@ -48,7 +48,7 @@ namespace DapperExtensions.Connections
             _enteredPool = enteredPool;
             if (enteredPool)
             {
-                var acquired = AcquireOrCreateConnection();
+                var acquired = RentOrCreateConnection();
                 _stopwatch.Stop();
 
                 return acquired;

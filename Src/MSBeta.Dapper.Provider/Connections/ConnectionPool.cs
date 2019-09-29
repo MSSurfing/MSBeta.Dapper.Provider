@@ -22,7 +22,6 @@ namespace DapperExtensions.Connections
         internal SemaphoreSlim WaitQueue { get; private set; }
 
         internal ListConnectionHolder ListConnectionHolder { get; private set; }
-        private TimeSpan _waitQueueTimeout = TimeSpan.FromMinutes(2d);                  // Todo
         #endregion
 
         #region Ctor
@@ -215,7 +214,7 @@ namespace DapperExtensions.Connections
             try
             {
                 helper.CheckingOutConnection();
-                var enteredPool = _poolQueue.Wait(_waitQueueTimeout);
+                var enteredPool = _poolQueue.Wait(_options.WaitQueueTimeout);
                 return helper.EnteredPool(enteredPool);
             }
             catch (Exception ex)

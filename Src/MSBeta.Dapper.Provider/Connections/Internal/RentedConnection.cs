@@ -54,7 +54,7 @@ namespace DapperExtensions.Connections.Internal
             return _reference.Instance.CreateCommand();
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             if (!_disposed)
             {

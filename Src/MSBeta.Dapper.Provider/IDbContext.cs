@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.Common;
+using System.Data;
 
 namespace DapperExtensions
 {
@@ -13,6 +13,6 @@ namespace DapperExtensions
 
 
         // temp test
-        DbConnection GetDbConnection();
+        IDbConnection GetDbConnection();
     }
 }

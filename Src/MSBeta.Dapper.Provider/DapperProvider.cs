@@ -56,6 +56,17 @@ namespace DapperExtensions
             return Initialize(connectionString, new ConnectionOptions(), new DefaultConnectionFactory(dbOption));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="maxConnections">线程池最大连接数</param>
+        /// <param name="minConnections">最小连接数</param>
+        /// <param name="waitQueueSize">等待队列大小</param>
+        /// <param name="waitQueueTimeout">等待超时时间（默认2分钟）</param>
+        /// <param name="maintenanceInterval">线程池连接维护间隔（将会释放过期的连接）</param>
+        /// <param name="dbOption">数据类型</param>
+        /// <returns></returns>
         public static IConnectionPool Initialize(string connectionString,
             int maxConnections, int minConnections, int waitQueueSize,
             TimeSpan? waitQueueTimeout = null, TimeSpan? maintenanceInterval = null, DbOption dbOption = DbOption.UseSqlServer)

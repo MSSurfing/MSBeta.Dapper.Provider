@@ -1,0 +1,9 @@
+研发的基本草稿
+
+基本使用方式
+	1、程序启动时 DapperProvider.Initialize 进行初始化
+		如果 使用 DapperProvider.Initialize(DbOption) 则不使用ConnectionPool
+	2、使用 IRepository<T> 读取数据
+		需要前 定义实体和mapper
+
+考虑Connection的释放
