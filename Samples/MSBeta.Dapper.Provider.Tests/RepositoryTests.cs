@@ -40,7 +40,7 @@ namespace MSBeta.Dapper.Provider.Sample.Tests
         {
             //EngineContext.Resolve<IUserService>().Insert(new User { Id = Guid.NewGuid(), Name = "Mock02" });
 
-            int toExclusive = 3;
+            int toExclusive = 3000;
             for (int i = 0; i < toExclusive; i++)
             {
                 using (var userService = EngineContext.Resolve<IRepository<User>>())

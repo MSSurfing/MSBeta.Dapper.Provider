@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBeta.Dapper.Provider", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBeta.Dapper.Provider.Sample.Tests", "Samples\MSBeta.Dapper.Provider.Tests\MSBeta.Dapper.Provider.Sample.Tests.csproj", "{75112380-3107-4FE9-A433-8B8F4B7F8624}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBeta.Dapper.Grpc5.Tests", "Samples\MSBeta.Dapper.Grpc5.Tests\MSBeta.Dapper.Grpc5.Tests.csproj", "{BEF75557-2DA5-47E2-92B5-5533A58DC559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{75112380-3107-4FE9-A433-8B8F4B7F8624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75112380-3107-4FE9-A433-8B8F4B7F8624}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75112380-3107-4FE9-A433-8B8F4B7F8624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF75557-2DA5-47E2-92B5-5533A58DC559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF75557-2DA5-47E2-92B5-5533A58DC559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF75557-2DA5-47E2-92B5-5533A58DC559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF75557-2DA5-47E2-92B5-5533A58DC559}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 		{C9E83517-FE5D-45C4-A6AD-549124C13CC9} = {D9BFCBFA-E86A-44D5-B57D-D58399AB5D9F}
 		{0EADCF86-4E74-4E66-AFE1-B69F472BAA6F} = {C9E83517-FE5D-45C4-A6AD-549124C13CC9}
 		{75112380-3107-4FE9-A433-8B8F4B7F8624} = {876078C5-2F7C-43BC-862F-9E3B34EE3715}
+		{BEF75557-2DA5-47E2-92B5-5533A58DC559} = {876078C5-2F7C-43BC-862F-9E3B34EE3715}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50D2CB80-41CE-443F-8609-71508296C6F8}

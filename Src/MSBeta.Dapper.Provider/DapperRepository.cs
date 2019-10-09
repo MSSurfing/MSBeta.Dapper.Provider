@@ -17,14 +17,14 @@ namespace DapperExtensions
         public DapperRepository() : this(DapperProvider.ConnectionPool.RentConnection()) { }
         public DapperRepository(IConnectionPool _connectionPool) : this(_connectionPool.RentConnection()) { }
         public DapperRepository(IDbContext dbContext) : this(dbContext.GetDbConnection()) { }
-        public DapperRepository(IDbConnection IDbConnection)
+        public DapperRepository(IDbConnection dbConnection)
         {
-            _dbConnection = IDbConnection;
+            _dbConnection = dbConnection;
         }
         #endregion
 
         #region Utilities
-        protected virtual IDbConnection IDbConnection => _dbConnection;
+        protected virtual IDbConnection DbConnection => _dbConnection;
         #endregion
 
         #region Properties

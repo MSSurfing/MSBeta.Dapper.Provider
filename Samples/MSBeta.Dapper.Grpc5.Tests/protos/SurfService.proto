@@ -1,0 +1,15 @@
+﻿syntax="proto3";
+
+package Surfing;
+
+service SurfService {
+	rpc GetOne(GetReq) returns(GetRes) {}
+}
+
+message GetReq{
+	string Id = 1;
+}
+
+message GetRes{
+	string Data = 1;
+}
