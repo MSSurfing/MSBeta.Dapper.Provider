@@ -29,19 +29,20 @@ namespace MSBeta.Dapper.Grpc5.Tests
         [Fact]
         public void parallel_test()
         {
-            int requestTime = 10000;
+            int requestTime = 100000;
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
+            int i = 0;
             Parallel.For(1, requestTime, index =>
             {
                 var res = _client.GetOne(new GetReq { Id = Guid.NewGuid().ToString() });
-                WriteLine("T:{0}", res.Data);
+                i++;
             });
 
             sw.Stop();
-            WriteLine("同步完成 耗时：{0}量", sw.ElapsedMilliseconds);
+            WriteLine("同步完成 耗时：{0}量,{1}s", i, sw.ElapsedMilliseconds);
         }
     }
 }
