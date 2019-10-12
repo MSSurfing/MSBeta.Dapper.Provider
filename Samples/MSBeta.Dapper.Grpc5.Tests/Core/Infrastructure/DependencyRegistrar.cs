@@ -19,9 +19,11 @@ namespace MSBeta.Dapper.Grpc5.Tests.Core.Infrastructure
         {
             var connectionString = "Data Source=139.159.137.99;Initial Catalog=Surfing.Test109;Persist Security Info=True;User ID=sa2;Password=z;Connect Timeout=360";
             var dbOption = DbOption.UseSqlServer;
-            DapperProvider.Initialize(connectionString, dbOption);
+            var connectionPool = DapperProvider.Initialize(connectionString, dbOption);
+            //builder.Register<IConnectionPool>(e => connectionPool);
 
-            builder.RegisterType<UserService>().As<IUserService>().InstancePerDependency();
+            //builder.RegisterType<UserService>().As<IUserService>().InstancePerDependency();
+            builder.RegisterType<User2Service>().As<IUserService>().InstancePerDependency();
 
             builder.RegisterGeneric(typeof(DapperRepository<>)).As(typeof(IRepository<>))
                 .InstancePerDependency();

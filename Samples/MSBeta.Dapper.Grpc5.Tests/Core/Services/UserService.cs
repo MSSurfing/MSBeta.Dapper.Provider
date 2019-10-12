@@ -15,7 +15,6 @@ namespace MSBeta.Dapper.Provider.Tests.Services
             _userRepository = userRepository;
         }
 
-
         public IList<User> Search(string name = null, int pageIndex = 0, int pageSize = 10)
         {
             var query = _userRepository.FilterAnd;
