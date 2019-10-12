@@ -1,7 +1,10 @@
-﻿using Grpc.Core;
+﻿using Autofac.Engine;
+using Grpc.Core;
 using MSBeta.Dapper.Grpc5.Tests.Implements;
 using System.Threading;
 using System.Threading.Tasks;
+using Xunit.Abstractions;
+using static Surfing.SurfService;
 
 namespace MSBeta.Dapper.Grpc5.Tests
 {
@@ -10,6 +13,7 @@ namespace MSBeta.Dapper.Grpc5.Tests
         private const string SERVICE_Host = "127.0.0.1";
         private const int SERVICE_PORT = 20389;
 
+        protected ITestOutputHelper _testHelper = null;
         protected Channel LocalChannel;
 
         public ImplementTests()
@@ -47,7 +51,7 @@ namespace MSBeta.Dapper.Grpc5.Tests
 
                 IsRunning = true;
 
-                //EngineContext.Initialize();
+                EngineContext.Initialize();
 
                 Task.Run(() =>
                 {
@@ -68,12 +72,12 @@ namespace MSBeta.Dapper.Grpc5.Tests
         {
 
             // Grpc service 
-            var roleGService = Surfing.SurfService.BindService(new SurfServiceImplement());
+            var surfGService = Surfing.SurfService.BindService(EngineContext.Resolve<SurfServiceBase>());
 
             Server server = new Server()
             {
                 Services = {
-                    roleGService
+                    surfGService
                 },
                 Ports = { new ServerPort("127.0.0.1", port, ServerCredentials.Insecure) }
             };
@@ -84,6 +88,17 @@ namespace MSBeta.Dapper.Grpc5.Tests
         public virtual void Dispose()
         {
 
+        }
+        #endregion
+
+        #region Utilities
+        protected virtual void WriteLine(string format, params object[] args)
+        {
+            if (_testHelper != null)
+                _testHelper.WriteLine(format, args);
+
+            System.Console.WriteLine(format, args);
+            System.Diagnostics.Debug.WriteLine(format, args);
         }
         #endregion
     }
