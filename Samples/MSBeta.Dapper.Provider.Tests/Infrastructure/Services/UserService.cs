@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MSBeta.Dapper.Provider.Tests.Services
 {
@@ -45,6 +46,18 @@ namespace MSBeta.Dapper.Provider.Tests.Services
         public void Dispose()
         {
             _userRepository.Dispose();
+        }
+
+        public async Task<IList<User>> SearchAsync(string name = null, int pageIndex = 0, int pageSize = 10)
+        {
+            var query = _userRepository.FilterAnd;
+
+            if (!string.IsNullOrEmpty(name))
+                query.Where(e => e.Name, Operator.Eq, name);
+
+            var sort = query.Sort(e => e.Name);
+
+            return (await _userRepository.GetPagedAsync(query, sort, pageIndex, pageSize)).ToList();
         }
     }
 }

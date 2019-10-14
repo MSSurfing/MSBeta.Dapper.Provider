@@ -63,5 +63,15 @@ namespace MSBeta.Dapper.Provider.Sample.Tests
                 var users = userService.GetOne();
             };
         }
+
+
+        [Fact]
+        public virtual async Task debug_services_tests4()
+        {
+            using (var userService = EngineContext.Resolve<IUserService>())
+            {
+                var users = await userService.SearchAsync();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DapperExtensions
 {
@@ -28,15 +29,18 @@ namespace DapperExtensions
         #endregion
 
         #region Properties
+
         public virtual DapperFilter<T> FilterAnd => new DapperFilter<T>(GroupOperator.And);
         public virtual DapperFilter<T> FilterOr => new DapperFilter<T>(GroupOperator.Or);
 
         public virtual int? CommandTimeout { get; set; }
+
         #endregion
 
+
+        #region Sync
+
         #region Get / Count / Exists
-        // 不推荐
-        //IEnumerable<T> GetFromSql(string sql, object param = null){}
 
         public virtual IEnumerable<T> GetPaged(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30)
         {
@@ -128,6 +132,97 @@ namespace DapperExtensions
         {
             return _dbConnection.Delete<T>(where, _dbTransaction, CommandTimeout);
         }
+        #endregion
+
+        #endregion
+
+
+        #region Async
+
+        #region Get / Count / Exists
+
+        public virtual async Task<IEnumerable<T>> GetPagedAsync(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30)
+        {
+            ISort[] sorts = null;
+            if (sort != null)
+                sorts = new[] { sort };
+
+            return await _dbConnection.GetPageAsync<T>(where, sorts, pageIndex, pageSize, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<IEnumerable<T>> GetPagedAsync(IPredicate where = null, ISort[] sort = null, int pageIndex = 0, int pageSize = 30)
+        {
+            return await _dbConnection.GetPageAsync<T>(where, sort, pageIndex, pageSize, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<IEnumerable<T>> GetListAsync(IPredicate where = null, params ISort[] sort)
+        {
+            return await _dbConnection.GetListAsync<T>(where, sort, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<T> GetOneAsync(IPredicate where = null, params ISort[] sort)
+        {
+            return (await _dbConnection.GetListAsync<T>(where, sort, _dbTransaction, CommandTimeout)).FirstOrDefault();
+        }
+
+        public virtual async Task<T> GetByIdAsync(object Id)
+        {
+            return await _dbConnection.GetAsync<T>(Id, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<int> CountAsync(IPredicate where)
+        {
+            return await _dbConnection.CountAsync<T>(where, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<bool> ExistsAsync(IPredicate where)
+        {
+            // ToImprove, Use ExistsPredicate
+            return await _dbConnection.CountAsync<T>(where, _dbTransaction, CommandTimeout) > 0;
+        }
+        #endregion
+
+        #region Insert / Update / Delete
+
+
+        public virtual async Task<string> InsertAsync(T entity)
+        {
+            var result = await this.InsertDynamicAsync(entity);
+            if (result == null)
+                return string.Empty;
+
+            return result.ToString();
+        }
+
+        public virtual async Task<dynamic> InsertDynamicAsync(T entity)
+        {
+            if (entity == null)
+                return null;
+
+            return await _dbConnection.InsertAsync<T>(entity, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task InsertAsync(IEnumerable<T> entities)
+        {
+            await _dbConnection.InsertAsync<T>(entities, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<bool> UpdateAsync(T entity)
+        {
+            return await _dbConnection.UpdateAsync(entity, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<bool> DeleteAsync(T entity)
+        {
+            return await _dbConnection.DeleteAsync<T>(entity, _dbTransaction, CommandTimeout);
+        }
+
+        public virtual async Task<bool> DeleteAsync(IPredicate where)
+        {
+            return await _dbConnection.DeleteAsync<T>(where, _dbTransaction, CommandTimeout);
+        }
+        #endregion
+
         #endregion
 
         #region Use IDbTransaction
