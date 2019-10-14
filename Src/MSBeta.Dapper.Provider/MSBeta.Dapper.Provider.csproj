@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>DapperExtensions</RootNamespace>
-    <Version>3.0.1-preview</Version>
+    <Version>3.0.2-preview</Version>
     <Authors>MSBeta</Authors>
     <Product>MSBeta</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
