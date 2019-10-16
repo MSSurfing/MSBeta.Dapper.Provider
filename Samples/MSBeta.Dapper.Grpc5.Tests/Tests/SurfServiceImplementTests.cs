@@ -24,6 +24,12 @@ namespace MSBeta.Dapper.Grpc5.Tests
         public void get_one_test()
         {
             var res = _client.GetOne(new GetReq { Id = Guid.NewGuid().ToString() });
+
+            res = _client.GetOne(new GetReq { Id = Guid.NewGuid().ToString() });
+
+            res = _client.GetOne(new GetReq { Id = Guid.NewGuid().ToString() });
+
+            res = _client.GetOne(new GetReq { Id = Guid.NewGuid().ToString() });
         }
 
         [Fact]

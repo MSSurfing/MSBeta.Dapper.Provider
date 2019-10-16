@@ -1,0 +1,4 @@
+﻿该应用测试主要测试IUserService的在Grpc的释放方便。
+	其中User2Service 是手动释放是可行的。
+	而UserService未能自动释放，目标是在Grpc+Autofac中实现自动释放。
+	
