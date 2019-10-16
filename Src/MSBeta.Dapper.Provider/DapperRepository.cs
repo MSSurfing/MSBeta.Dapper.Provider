@@ -37,9 +37,6 @@ namespace DapperExtensions
 
         #endregion
 
-
-        #region Sync
-
         #region Get / Count / Exists
 
         public virtual IEnumerable<T> GetPaged(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30)
@@ -134,12 +131,7 @@ namespace DapperExtensions
         }
         #endregion
 
-        #endregion
-
-
-        #region Async
-
-        #region Get / Count / Exists
+        #region Async Get / Count / Exists
 
         public virtual async Task<IEnumerable<T>> GetPagedAsync(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30)
         {
@@ -182,7 +174,7 @@ namespace DapperExtensions
         }
         #endregion
 
-        #region Insert / Update / Delete
+        #region Async Insert / Update / Delete
 
 
         public virtual async Task<string> InsertAsync(T entity)
@@ -221,8 +213,6 @@ namespace DapperExtensions
         {
             return await _dbConnection.DeleteAsync<T>(where, _dbTransaction, CommandTimeout);
         }
-        #endregion
-
         #endregion
 
         #region Use IDbTransaction

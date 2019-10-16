@@ -14,9 +14,6 @@ namespace DapperExtensions
         int? CommandTimeout { get; set; }
         #endregion
 
-
-        #region Sync
-
         #region Get / Count / Exists
 
         IEnumerable<T> GetPaged(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30);
@@ -56,12 +53,7 @@ namespace DapperExtensions
         bool Delete(IPredicate where);
         #endregion
 
-        #endregion
-
-
-        #region Async
-
-        #region Get / Count / Exists
+        #region Async Get / Count / Exists
         Task<IEnumerable<T>> GetPagedAsync(IPredicate where = null, ISort sort = null, int pageIndex = 0, int pageSize = 30);
 
         Task<IEnumerable<T>> GetPagedAsync(IPredicate where = null, ISort[] sort = null, int pageIndex = 0, int pageSize = 30);
@@ -78,7 +70,7 @@ namespace DapperExtensions
 
         #endregion
 
-        #region Insert / Update / Delete
+        #region Async Insert / Update / Delete
 
         /// <summary>
         /// Dapper.Extensions.Insert 方法 返回值是 表的主键值，而不是影响行数或bool。
@@ -97,8 +89,6 @@ namespace DapperExtensions
         Task<bool> DeleteAsync(T entity);
 
         Task<bool> DeleteAsync(IPredicate where);
-
-        #endregion
 
         #endregion
 
